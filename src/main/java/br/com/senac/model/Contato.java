@@ -23,6 +23,12 @@ public class Contato {
         this.numeroTelefone = numeroTelefone;
         this.email = email;
     }
+    
+    public Contato(int id, String dataCadastro, String nome, String dataNascimento, String numeroTelefone, String email){
+        this(nome, dataNascimento, numeroTelefone, email);                
+        this.id = id;
+        this.dataCadastro = dataCadastro;
+    }
 
     /**
      * @return the id
