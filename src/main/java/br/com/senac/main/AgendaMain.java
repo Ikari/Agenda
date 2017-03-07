@@ -27,33 +27,73 @@ public class AgendaMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        painelPrincipal = new javax.swing.JPanel();
+        painelCadastrar = new br.com.senac.main.CadastrarContato();
+        painelListar = new br.com.senac.main.ListarContato();
+        MenuPrincipal = new javax.swing.JMenuBar();
+        MenuCadastro = new javax.swing.JMenu();
+        MenuLista = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        painelPrincipal.setLayout(new java.awt.CardLayout());
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        javax.swing.GroupLayout painelCadastrarLayout = new javax.swing.GroupLayout(painelCadastrar);
+        painelCadastrar.setLayout(painelCadastrarLayout);
+        painelCadastrarLayout.setHorizontalGroup(
+            painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        painelCadastrarLayout.setVerticalGroup(
+            painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 279, Short.MAX_VALUE)
+        );
 
-        setJMenuBar(jMenuBar1);
+        painelPrincipal.add(painelCadastrar, "card2");
+
+        javax.swing.GroupLayout painelListarLayout = new javax.swing.GroupLayout(painelListar);
+        painelListar.setLayout(painelListarLayout);
+        painelListarLayout.setHorizontalGroup(
+            painelListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        painelListarLayout.setVerticalGroup(
+            painelListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 279, Short.MAX_VALUE)
+        );
+
+        painelPrincipal.add(painelListar, "card3");
+
+        MenuCadastro.setText("Cadastro");
+        MenuCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuCadastroActionPerformed(evt);
+            }
+        });
+        MenuPrincipal.add(MenuCadastro);
+
+        MenuLista.setText("Lista");
+        MenuPrincipal.add(MenuLista);
+
+        setJMenuBar(MenuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MenuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MenuCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -91,8 +131,11 @@ public class AgendaMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu MenuCadastro;
+    private javax.swing.JMenu MenuLista;
+    private javax.swing.JMenuBar MenuPrincipal;
+    private br.com.senac.main.CadastrarContato painelCadastrar;
+    private br.com.senac.main.ListarContato painelListar;
+    private javax.swing.JPanel painelPrincipal;
     // End of variables declaration//GEN-END:variables
 }
