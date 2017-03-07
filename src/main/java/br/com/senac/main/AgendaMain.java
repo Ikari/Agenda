@@ -5,12 +5,17 @@
  */
 package br.com.senac.main;
 
+import br.com.senac.db.ContatoDb;
+import java.awt.CardLayout;
+
 /**
  *
  * @author roger.roliveira
  */
 public class AgendaMain extends javax.swing.JFrame {
 
+    ContatoDb db;
+    
     /**
      * Creates new form AgendaMain
      */
@@ -28,8 +33,8 @@ public class AgendaMain extends javax.swing.JFrame {
     private void initComponents() {
 
         painelPrincipal = new javax.swing.JPanel();
-        painelCadastrar = new br.com.senac.main.CadastrarContato();
-        painelListar = new br.com.senac.main.ListarContato();
+        cadastrarContato1 = new br.com.senac.main.CadastrarContato();
+        listarContato1 = new br.com.senac.main.ListarContato();
         MenuPrincipal = new javax.swing.JMenuBar();
         MenuCadastro = new javax.swing.JMenu();
         MenuLista = new javax.swing.JMenu();
@@ -37,34 +42,15 @@ public class AgendaMain extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         painelPrincipal.setLayout(new java.awt.CardLayout());
-
-        javax.swing.GroupLayout painelCadastrarLayout = new javax.swing.GroupLayout(painelCadastrar);
-        painelCadastrar.setLayout(painelCadastrarLayout);
-        painelCadastrarLayout.setHorizontalGroup(
-            painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        painelCadastrarLayout.setVerticalGroup(
-            painelCadastrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
-
-        painelPrincipal.add(painelCadastrar, "card2");
-
-        javax.swing.GroupLayout painelListarLayout = new javax.swing.GroupLayout(painelListar);
-        painelListar.setLayout(painelListarLayout);
-        painelListarLayout.setHorizontalGroup(
-            painelListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        painelListarLayout.setVerticalGroup(
-            painelListarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
-        );
-
-        painelPrincipal.add(painelListar, "card3");
+        painelPrincipal.add(cadastrarContato1, "painelCadastrar");
+        painelPrincipal.add(listarContato1, "painelListar");
 
         MenuCadastro.setText("Cadastro");
+        MenuCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuCadastroMouseClicked(evt);
+            }
+        });
         MenuCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuCadastroActionPerformed(evt);
@@ -73,6 +59,16 @@ public class AgendaMain extends javax.swing.JFrame {
         MenuPrincipal.add(MenuCadastro);
 
         MenuLista.setText("Lista");
+        MenuLista.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuListaMouseClicked(evt);
+            }
+        });
+        MenuLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuListaActionPerformed(evt);
+            }
+        });
         MenuPrincipal.add(MenuLista);
 
         setJMenuBar(MenuPrincipal);
@@ -85,16 +81,30 @@ public class AgendaMain extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuCadastroActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_MenuCadastroActionPerformed
 
+    private void MenuListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuListaActionPerformed
+
+    }//GEN-LAST:event_MenuListaActionPerformed
+
+    private void MenuCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuCadastroMouseClicked
+        CardLayout card = (CardLayout)painelPrincipal.getLayout();
+        card.show(painelPrincipal, "painelCadastrar");
+    }//GEN-LAST:event_MenuCadastroMouseClicked
+
+    private void MenuListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuListaMouseClicked
+        CardLayout card = (CardLayout)painelPrincipal.getLayout();
+        card.show(painelPrincipal, "painelListar");
+    }//GEN-LAST:event_MenuListaMouseClicked
+    
     /**
      * @param args the command line arguments
      */
@@ -106,7 +116,7 @@ public class AgendaMain extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -134,8 +144,8 @@ public class AgendaMain extends javax.swing.JFrame {
     private javax.swing.JMenu MenuCadastro;
     private javax.swing.JMenu MenuLista;
     private javax.swing.JMenuBar MenuPrincipal;
-    private br.com.senac.main.CadastrarContato painelCadastrar;
-    private br.com.senac.main.ListarContato painelListar;
+    private br.com.senac.main.CadastrarContato cadastrarContato1;
+    private br.com.senac.main.ListarContato listarContato1;
     private javax.swing.JPanel painelPrincipal;
     // End of variables declaration//GEN-END:variables
 }

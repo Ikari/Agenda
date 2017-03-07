@@ -5,10 +5,19 @@
  */
 package br.com.senac.db;
 
+import br.com.senac.model.Contato;
+import java.util.ArrayList;
+
 /**
  *
  * @author roger.roliveira
  */
 public class ContatoDb {
+    public void AdicionarContato(Contato contato){
+        String query = "insert into t_contato (id, nome, data_nascimento, telefone, email, data_cadastro) values(?,?,?,?,?)";
+    }
     
+    public ArrayList<Contato> obterContatos(){
+        return new ArrayList<>();
+    }
 }
