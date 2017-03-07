@@ -8,6 +8,9 @@ package br.com.senac.main;
 import br.com.senac.db.ConnectionUtils;
 import br.com.senac.db.ContatoDb;
 import br.com.senac.model.Contato;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -80,27 +83,23 @@ public class CadastrarContato extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(178, 178, 178)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnSalvar)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(btnSalvar)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEmail)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jLabel5)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                            .addComponent(txtEmail)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)))
+                    .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtEmail, txtNome});
@@ -108,7 +107,7 @@ public class CadastrarContato extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(43, 43, 43)
                 .addComponent(jLabel5)
                 .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
@@ -128,25 +127,66 @@ public class CadastrarContato extends javax.swing.JPanel {
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41)
                 .addComponent(btnSalvar)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if (txtNome.getText().isEmpty())
-            JOptionPane.showMessageDialog(this, "É obrigatório informar um nome.");
         
-        if (txtDataNascimento.getText().isEmpty())
-            JOptionPane.showMessageDialog(this, "É obrigatório informar um nome.");
-        
-        if (txtTelefone.getText().isEmpty())
-            JOptionPane.showMessageDialog(this, "É obrigatório informar um telefone.");
-        
-        if (txtEmail.getText().isEmpty())
-            JOptionPane.showMessageDialog(this, "É obrigatório informar um email.");
-                   
-        Contato contato = new Contato(txtNome.getText(), txtDataNascimento.getText(), txtTelefone.getText(), txtEmail.getText());
-        db.adicionarContato(contato);
+            if (txtNome.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "É obrigatório informar um nome.");
+                return;
+            }
+
+            if (txtDataNascimento.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "É obrigatório informar a data de nascimento.");
+                return;
+            }
+            
+            try
+            {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                sdf.parse(txtDataNascimento.getText());//Para validar a data            
+            }
+            catch(ParseException pe)
+            {
+                JOptionPane.showMessageDialog(this, "Data inválida. Informe uma data no formato DD/MM/YYYY");
+                return;
+            }
+            
+            if (txtTelefone.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "É obrigatório informar um telefone.");
+                return;
+            }
+            
+            if (txtTelefone.getText().length() < 8 || txtTelefone.getText().length() > 9){
+                JOptionPane.showMessageDialog(this, "Número de telefone inválido. Digite apenas os dígitos do telefone, sem DDD.");
+                return;
+            }
+                        
+            try
+            {
+                Integer.parseInt(txtTelefone.getText());
+            }
+            catch(NumberFormatException nfe)
+            {
+                JOptionPane.showMessageDialog(this, "Número de telefone inválido. Digite apenas os dígitos do telefone, sem DDD.");
+                return;
+            }
+
+            if (txtEmail.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "É obrigatório informar um email.");
+                return;
+            }
+            
+            if (txtEmail.getText().indexOf("@") == -1){
+                JOptionPane.showMessageDialog(this, "Email inválido.");
+                return;
+            }
+
+            Contato contato = new Contato(txtNome.getText(), txtDataNascimento.getText(), txtTelefone.getText(), txtEmail.getText());
+            db.adicionarContato(contato);
+                
         limparCampos();
     }//GEN-LAST:event_btnSalvarActionPerformed
 

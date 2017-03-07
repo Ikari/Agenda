@@ -9,6 +9,7 @@ import br.com.senac.model.Contato;
 import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -143,29 +144,21 @@ public class ContatoDb extends BaseDb {
         }          
     }        
     
-    public List<Contato> obterContatos(String nome){
+    public List<Contato> obterContatos(){
         
         PreparedStatement stt = null;
         ResultSet result = null;
         
         try
-        {            
-            if (nome == null)
-                return new ArrayList<>();
-            
-            String command = "select c.id, c.data_cadastro, c.nome, c.data_nascimento, c.numero_telefone, c.email from t_contato c where UPPER(c.nome) like UPPER(?) order by c.nome";
-            
-            stt = obterStatement(command);            
-            
-            stt.setString(1, "%" + nome + "%");
-            
-            result  = stt.executeQuery();
+        {                   
+            String command = "select c.id, c.data_cadastro, c.nome, c.data_nascimento, c.numero_telefone, c.email from t_contato c order by c.nome";
+                        
+            result  = getList(command);
             
             ArrayList lista = new ArrayList<>();
             
-            while(result.next()){
-                                                
-                Contato c = new Contato(result.getInt("id"), result.getString("data_cadastro"), result.getString("nome"), result.getString("data_nascimento"), result.getString("numero_telefone"), result.getString("email"));
+            while(result.next()){                
+                Contato c = new Contato(result.getInt("id"), new SimpleDateFormat("dd/MM/yyyy").format(result.getDate("data_cadastro")), result.getString("nome"), result.getString("data_nascimento"), result.getString("numero_telefone"), result.getString("email"));
                 lista.add(c);
             }
             

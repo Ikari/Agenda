@@ -21,6 +21,7 @@ public class AgendaMain extends javax.swing.JFrame {
      */
     public AgendaMain() {
         initComponents();
+        setResizable(false);
     }
 
     /**
@@ -77,11 +78,11 @@ public class AgendaMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+            .addComponent(painelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 417, Short.MAX_VALUE)
         );
 
         pack();
@@ -101,6 +102,7 @@ public class AgendaMain extends javax.swing.JFrame {
     }//GEN-LAST:event_MenuCadastroMouseClicked
 
     private void MenuListaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuListaMouseClicked
+        listarContato1.popularContatos();        
         CardLayout card = (CardLayout)painelPrincipal.getLayout();
         card.show(painelPrincipal, "painelListar");
     }//GEN-LAST:event_MenuListaMouseClicked
